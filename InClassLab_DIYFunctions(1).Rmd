@@ -1,0 +1,130 @@
+---
+title: "In Class Lab"
+author: "Dr. Shoemaker and John Beall"
+date: "DATA 2401"
+output: html_document
+---
+**Note: Your exam will be in a similar format to this (RMarkdown File with Questions and Code chunks for your answers), so make sure you have the process for knitting to html working.** 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## In Class Activity 
+
+1. Write a function to simulate rolling a 6-sided die and returns the result.
+
+```{r}
+roll <- function(){
+  d6 <- sample(1:6, 1)
+  return(d6)
+}
+roll()
+
+
+```
+
+
+
+1. Write a function to simulate rolling 2 6-sided dice that returns the sum of the rolls. 
+
+```{r}
+double_roll <- function(){
+  d1 <- sample(1:6, 1)
+  d2 <- sample(1:6, 1)
+  return(sum(d1+d2))
+}
+double_roll()
+
+```
+
+
+1. Write a function that takes two people name's as strings, simulates rolling a 6-sided die for each of the names, then returns the name of the person with the higher roll. The function should reroll once on a tie, but if there is a second tie, it should return "draw". 
+
+```{r}
+# Your one-roll function goes here{
+dice_game <- function(){
+  Name1 <- "Kyle"
+  Name2 <- "Chris"
+   roll1 <- sample(1:6, 1)
+  roll2 <- sample(1:6, 1)
+  if (roll1==roll2) {
+    roll1 <- sample(1:6, 1)
+    roll2 <- sample(1:6, 1)
+  
+  }
+  if (roll1==roll2) {
+    return("draw")
+  }
+    else if (roll1 > roll2) {
+     return(paste(Name1, "is the Winner!")) 
+    }
+  else if (roll1 < roll2) {
+     return(paste(Name2, "is the Winner!"))
+  }
+}
+dice_game()
+```
+
+
+2. Write a second function (you may start by modifying the first one) that takes two names as strings, simulates both of them rolling die 15 times, and returns the name of the person who "won" more rolls. Don't reroll ties this time, but don't count them as "wins". 
+
+```{r}
+# Your 15-roll function goes here
+dice15_game <- function(){
+  Name1 <- "Kyle"
+  Name2 <- "Chris"
+  roll1 <- sample(1:6, 15, replace = TRUE)
+  roll2 <- sample(1:6, 15, replace = TRUE)
+  sum1 <- sum(roll1)
+  sum2 <- sum(roll2)
+  
+  if (sum1 == sum2) {
+    return(paste("No one wins!"))
+  }
+  
+  if (sum1 > sum2) {
+    return(paste( Name1, "is the winner!"))
+  }
+   if (sum1 < sum2) {
+    return(paste( Name2, "is the winner!"))
+}}
+ 
+
+
+dice15_game()
+
+```
+ 
+
+3. Modify your function from (2) so that the person in the first argument has a die that is weighted to get higher numbers more often (you may decide the actual percentage change). Run the function ten or so times. Does the second person ever win?
+
+```{r}
+# Your "cheating" function goes here
+cheat_game <- function(){
+  Name1 <- "Kyle"
+  Name2 <- "Chris"
+  roll1 <- sample(1:6, 15, prob = c(1/8, 1/8, 1/8, 1/8, 1/8, 3/8), replace = TRUE)
+  roll2 <- sample(1:6, 15, replace = TRUE)
+  sum1 <- sum(roll1)
+  sum2 <- sum(roll2)
+  
+  if (sum1 == sum2) {
+    return(paste("No one wins!"))
+  }
+  
+  if (sum1 > sum2) {
+    return(paste( Name1, "is the winner!"))
+  }
+   if (sum1 < sum2) {
+    return(paste( Name2, "is the winner!"))
+}}
+ 
+
+
+cheat_game()
+
+
+  
+```
+
